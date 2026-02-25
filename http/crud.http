@@ -1,0 +1,12 @@
+### CREATE
+POST {{baseUrl}}/todos
+Content-Type: application/json
+
+{
+  "title": "할일1",
+  "description": "할일 설명1",
+  "completed": false
+}
+
+
+
