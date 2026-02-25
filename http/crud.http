@@ -14,5 +14,13 @@ GET {{baseUrl}}/todos/1
 ### READ 2
 GET {{baseUrl}}/todos
 
+### UPDATE
+PUT {{baseUrl}}/todos/1
+Content-Type: application/json
 
+{
+  "title": "수정된 할일1",
+  "description": "수정된 할일 설명1",
+  "completed": true
+}
 

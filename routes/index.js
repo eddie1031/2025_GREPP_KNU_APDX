@@ -90,6 +90,47 @@ router.get('/todos', async (req, res) => {
 });
 
 
+// 할일 수정
+router.put('/todos/:id', async (req, res) => {
+
+    try {
+
+        const foundTodo = await getRepository().findOneBy({ id: Number(req.params.id) });
+
+        if (!foundTodo) {
+            return res.status(404)
+                .json(
+                    {
+                        code: 404,
+                        message: '해당 할일은 찾을 수 없습니다.'
+                    }
+                );
+        }
+
+        const { title, description, completed } = req.body;
+
+        Object.assign(foundTodo, { title, description, completed });
+
+        const updatedTodo = await getRepository().save(foundTodo);
+
+        res.json({
+            code: 200,
+            message: "할일이 성공적으로 수정되었습니다.",
+            data: {
+                id: updatedTodo.id,
+                title: updatedTodo.title,
+                description: updatedTodo.description,
+                completed: updatedTodo.completed
+            }
+        });
+
+    } catch (err) {
+
+        res.status(500).json({ message: err.message });
+
+    }
+
+});
 
 
 module.exports = router;
