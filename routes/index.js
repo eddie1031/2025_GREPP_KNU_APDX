@@ -132,5 +132,36 @@ router.put('/todos/:id', async (req, res) => {
 
 });
 
+// 할일 삭제
+router.delete('/todos/:id', async (req, res) => {
+
+    try {
+
+        const foundTodo = await getRepository().findOneBy({ id: Number(req.params.id) });
+
+        if (!foundTodo) {
+            return res.status(404)
+                .json(
+                    {
+                        code: 404,
+                        message: '해당 할일은 찾을 수 없습니다.'
+                    }
+                );
+        }
+
+        await getRepository().remove(foundTodo);
+
+        res.json({
+            code: 204,
+            message: "할일이 성공적으로 삭제되었습니다"
+        });
+
+    } catch (err) {
+
+        res.status(500).json({ message: err.message });
+
+    }
+
+});
 
 module.exports = router;

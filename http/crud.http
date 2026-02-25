@@ -24,3 +24,5 @@ Content-Type: application/json
   "completed": true
 }
 
+### DELETE
+DELETE {{baseUrl}}/todos/1
