@@ -11,6 +11,8 @@ Content-Type: application/json
 ### READ 1
 GET {{baseUrl}}/todos/1
 
+### READ 2
+GET {{baseUrl}}/todos
 
 
 

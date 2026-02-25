@@ -68,5 +68,28 @@ router.get('/todos/:id', async (req, res) => {
 
 });
 
+// 할일 단건 조회
+router.get('/todos', async (req, res) => {
+
+    try {
+
+        const todos = await getRepository().find();
+
+        res.json({
+            code: 200,
+            message: "할일 목록을 성공적으로 조회하였습니다.",
+            data: todos
+        });
+
+    } catch (err) {
+
+        res.status(500).json({ message: err.message });
+
+    }
+
+});
+
+
+
 
 module.exports = router;
