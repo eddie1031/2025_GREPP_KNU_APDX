@@ -1,0 +1,15 @@
+name: express-todo
+
+services:
+
+  db:
+    image: mysql
+    container_name: express-todo-db
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
+      MYSQL_DATABASE: todo
+      MYSQL_USER: app1
+      MYSQL_PASSWORD: app1!
+
