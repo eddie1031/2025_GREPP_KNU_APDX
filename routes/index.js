@@ -24,7 +24,8 @@ router.post('/todos', async (req, resp) => {
 
         await getRepository().save(todo);
 
-        resp.json({
+        resp.status(201)
+            .json({
             code: 201,
             message: "할일이 성공적으로 생성되었습니다."
         });
@@ -32,6 +33,37 @@ router.post('/todos', async (req, resp) => {
     } catch (e) {
         console.log(e);
         throw e;
+    }
+
+});
+
+// 할일 단건 조회
+router.get('/todos/:id', async (req, res) => {
+
+    try {
+
+        const foundTodo = await getRepository().findOneBy({ id: Number(req.params.id) });
+
+        if (!foundTodo) {
+            return res.status(404)
+                .json(
+                    {
+                        code: 404,
+                        message: '해당 할일은 찾을 수 없습니다.'
+                    }
+                );
+        }
+
+        res.json({
+            code: 200,
+            message: "할일을 성공적으로 조회하였습니다.",
+            data: foundTodo
+        });
+
+    } catch (err) {
+
+        res.status(500).json({ message: err.message });
+
     }
 
 });

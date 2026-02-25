@@ -8,5 +8,9 @@ Content-Type: application/json
   "completed": false
 }
 
+### READ 1
+GET {{baseUrl}}/todos/1
+
+
 
 
